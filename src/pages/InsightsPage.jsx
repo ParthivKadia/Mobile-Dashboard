@@ -1,30 +1,30 @@
 const stats = [
   {
-    label: 'Revenue',
+    label: 'Revenue This Month',
     value: '₹4.8L',
-    subtext: 'This month',
+    subtext: 'Current month sales',
+    icon: 'bar_chart',
+    bg: 'bg-blue-500',
+  },
+  {
+    label: 'Total Earnings',
+    value: '₹12.6L',
+    subtext: 'Overall earnings',
     icon: 'currency_rupee',
     bg: 'bg-emerald-500',
   },
   {
-    label: 'Orders',
+    label: 'Total Orders',
     value: '1,284',
     subtext: 'Completed this month',
     icon: 'shopping_bag',
-    bg: 'bg-blue-500',
-  },
-  {
-    label: 'Avg Order',
-    value: '₹760',
-    subtext: 'Per order',
-    icon: 'monitoring',
     bg: 'bg-violet-500',
   },
   {
-    label: 'Growth',
-    value: '+18%',
-    subtext: 'Compared to last month',
-    icon: 'trending_up',
+    label: 'Avg Order Value',
+    value: '₹760',
+    subtext: 'Per order',
+    icon: 'monitoring',
     bg: 'bg-amber-500',
   },
 ]
@@ -74,14 +74,14 @@ const topRows = [
 
 function StatCard({ icon, label, value, subtext, bg }) {
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+    <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm min-w-0">
       <div className="flex items-start justify-between gap-3">
-        <div>
+        <div className="min-w-0">
           <p className="text-xs font-medium text-slate-400">{label}</p>
-          <p className="mt-2 text-2xl font-black text-slate-800">{value}</p>
+          <p className="mt-2 text-2xl font-black text-slate-800 break-words">{value}</p>
           <p className="mt-1 text-[11px] text-slate-400">{subtext}</p>
         </div>
-        <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${bg}`}>
+        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${bg}`}>
           <span className="material-symbols-outlined text-[18px] text-white">{icon}</span>
         </div>
       </div>
@@ -93,16 +93,16 @@ export default function InsightsPage() {
   const maxBarValue = Math.max(...chartData.map((item) => item.value), 1)
 
   return (
-    <main className="pt-24 pb-32 px-4 max-w-7xl mx-auto space-y-6">
-      <section className="rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 p-6 text-white shadow-lg shadow-blue-200">
-        <p className="text-sm font-medium text-blue-100 mb-1">Store Analytics</p>
-        <h2 className="text-2xl font-black tracking-tight mb-1">Insights</h2>
+    <main className="w-full overflow-x-hidden pt-24 pb-32 px-4 max-w-7xl mx-auto space-y-6">
+      <section className="rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 p-6 text-white shadow-lg shadow-blue-200 overflow-hidden">
+        <p className="mb-1 text-sm font-medium text-blue-100">Store Analytics</p>
+        <h2 className="mb-1 text-2xl font-black tracking-tight">Insights</h2>
         <p className="text-sm text-blue-100">
-          Track performance, revenue trends, and top-selling products in a simple way.
+          Track store growth, earnings, and product performance in one simple screen.
         </p>
       </section>
 
-      <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {stats.map((item) => (
           <StatCard
             key={item.label}
@@ -115,31 +115,31 @@ export default function InsightsPage() {
         ))}
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
-        <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-[1.5fr_1fr]">
+        <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm overflow-hidden">
           <div className="mb-4 flex items-center justify-between gap-3">
-            <div>
+            <div className="min-w-0">
               <h3 className="text-base font-black text-slate-800">Revenue Trend</h3>
-              <p className="mt-1 text-xs text-slate-400">Last 6 months performance</p>
+              <p className="mt-1 text-xs text-slate-400">Last 6 months</p>
             </div>
-            <span className="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-black text-blue-600">
-              6 Months
+            <span className="shrink-0 rounded-full bg-blue-50 px-3 py-1 text-[10px] font-black text-blue-600">
+              Monthly
             </span>
           </div>
 
-          <div className="flex h-64 items-end gap-3 overflow-x-auto no-scrollbar pt-3">
+          <div className="grid grid-cols-6 gap-2 items-end h-56">
             {chartData.map((item) => {
-              const height = Math.max((item.value / maxBarValue) * 100, 14)
+              const height = Math.max((item.value / maxBarValue) * 100, 16)
               return (
-                <div key={item.label} className="min-w-[52px] flex-1 text-center">
-                  <p className="mb-2 text-xs font-bold text-blue-600">{item.value}</p>
-                  <div className="flex h-44 items-end justify-center">
+                <div key={item.label} className="flex min-w-0 flex-col items-center justify-end">
+                  <p className="mb-2 text-[10px] font-bold text-blue-600">{item.value}</p>
+                  <div className="flex h-36 w-full items-end justify-center">
                     <div
-                      className="w-full max-w-[56px] rounded-t-2xl rounded-b-lg bg-gradient-to-b from-blue-400 via-blue-500 to-blue-700 shadow-md"
+                      className="w-full max-w-[34px] rounded-t-xl rounded-b-md bg-gradient-to-b from-blue-400 via-blue-500 to-blue-700"
                       style={{ height: `${height}%` }}
                     />
                   </div>
-                  <p className="mt-3 text-xs text-slate-400">{item.label}</p>
+                  <p className="mt-2 text-[10px] text-slate-400">{item.label}</p>
                 </div>
               )
             })}
@@ -149,7 +149,7 @@ export default function InsightsPage() {
         <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
           <div className="mb-4">
             <h3 className="text-base font-black text-slate-800">Quick Insights</h3>
-            <p className="mt-1 text-xs text-slate-400">Important store numbers</p>
+            <p className="mt-1 text-xs text-slate-400">Key store numbers</p>
           </div>
 
           <div className="space-y-4">
@@ -169,21 +169,18 @@ export default function InsightsPage() {
       <section className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
         <div className="mb-4">
           <h3 className="text-base font-black text-slate-800">Top Products</h3>
-          <p className="mt-1 text-xs text-slate-400">Best sellers this month</p>
+          <p className="mt-1 text-xs text-slate-400">Best performers this month</p>
         </div>
 
         <div className="space-y-3">
           {topRows.map((row) => (
-            <div
-              key={row.name}
-              className="rounded-2xl bg-slate-50 p-4"
-            >
+            <div key={row.name} className="rounded-2xl bg-slate-50 p-4">
               <div className="flex items-start justify-between gap-3">
-                <div>
+                <div className="min-w-0">
                   <h4 className="text-sm font-black text-slate-800">{row.name}</h4>
                   <p className="mt-1 text-xs text-slate-400">{row.meta}</p>
                 </div>
-                <div className="text-right">
+                <div className="shrink-0 text-right">
                   <p className="text-sm font-black text-blue-600">{row.value}</p>
                   <p className="mt-1 text-[11px] text-slate-400">{row.extra}</p>
                 </div>
