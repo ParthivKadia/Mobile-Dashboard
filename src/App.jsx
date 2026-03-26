@@ -1,15 +1,19 @@
+import { useState } from 'react'
 import TopAppBar from './components/TopAppBar'
 import BottomNavBar from './components/BottomNavBar'
 import FAB from './components/FAB'
 import ProductsPage from './pages/ProductsPage'
+import HomePage from './pages/HomePage'
 
 function App() {
+  const [activePage, setActivePage] = useState('home')
+
   return (
-    <div className="bg-surface text-on-surface min-h-screen pb-32">
+    <div className="bg-[#f7f9fb] text-on-surface min-h-screen pb-32">
       <TopAppBar />
-      <ProductsPage />
+      {activePage === 'home' ? <HomePage /> : <ProductsPage />}
       <FAB />
-      <BottomNavBar />
+      <BottomNavBar activePage={activePage} setActivePage={setActivePage} />
     </div>
   )
 }
