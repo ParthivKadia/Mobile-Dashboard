@@ -19,7 +19,10 @@ const TopAppBar = ({ setActivePage }) => {
           </h1>
         </div>
 
-        <button className="p-2 rounded-full hover:bg-blue-50/50 transition-all active:scale-95 duration-200">
+        <button
+          onClick={() => setActivePage('search')}
+          className="p-2 rounded-full hover:bg-blue-50/50 transition-all active:scale-95 duration-200"
+        >
           <span className="material-symbols-outlined text-slate-900">
             search
           </span>

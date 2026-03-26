@@ -2,12 +2,13 @@ import { useState } from 'react'
 import TopAppBar from './components/TopAppBar'
 import BottomNavBar from './components/BottomNavBar'
 import FAB from './components/FAB'
-import ProductsPage from './pages/ProductsPage'
 import HomePage from './pages/HomePage'
+import ProductsPage from './pages/ProductsPage'
 import OrdersPage from './pages/OrdersPage'
 import InsightsPage from './pages/InsightsPage'
 import MorePage from './pages/MorePage'
 import StoreProfilePage from './pages/StoreProfilePage'
+import SearchPage from './pages/SearchPage'
 
 function App() {
   const [activePage, setActivePage] = useState('home')
@@ -28,6 +29,8 @@ function App() {
         <MorePage />
       ) : activePage === 'store-profile' ? (
         <StoreProfilePage />
+      ) : activePage === 'search' ? (
+        <SearchPage setActivePage={setActivePage} />
       ) : (
         <HomePage />
       )}
