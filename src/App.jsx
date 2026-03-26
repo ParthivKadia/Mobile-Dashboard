@@ -5,6 +5,7 @@ import FAB from './components/FAB'
 import ProductsPage from './pages/ProductsPage'
 import HomePage from './pages/HomePage'
 import OrdersPage from './pages/OrdersPage'
+import InsightsPage from './pages/InsightsPage'
 
 function App() {
   const [activePage, setActivePage] = useState('home')
@@ -19,6 +20,8 @@ function App() {
         <ProductsPage />
       ) : activePage === 'orders' ? (
         <OrdersPage />
+      ) : activePage === 'insights' ? (
+        <InsightsPage />
       ) : (
         <HomePage />
       )}
