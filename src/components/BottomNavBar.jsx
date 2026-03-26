@@ -6,21 +6,22 @@ const navItems = [
   { icon: 'more_horiz', label: 'More', page: 'more' },
 ]
 
-const BottomNavBar = ({ activePage, setActivePage }) => {
+export default function BottomNavBar({ activePage, setActivePage }) {
   return (
-    <nav className="fixed bottom-4 left-3 right-3 rounded-2xl z-50 h-16 bg-white dark:bg-slate-900 shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-slate-100 flex items-center">
-      <div className="flex justify-between items-center w-full px-2">
+    <nav className="fixed bottom-4 left-3 right-3 z-50">
+      <div className="mx-auto flex h-16 w-full max-w-3xl items-center rounded-2xl border border-slate-100 bg-white px-2 shadow-[0_8px_32px_rgba(0,0,0,0.12)] overflow-hidden">
         {navItems.map(({ icon, label, page }) => {
           const active = activePage === page
+
           return (
             <button
-              key={label}
+              key={page}
               onClick={() => setActivePage(page)}
-              className={`flex flex-col items-center justify-center flex-1 py-1 rounded-xl transition-all duration-200 active:scale-90 ${
-                active ? 'text-primary' : 'text-slate-400 hover:text-slate-600'
+              className={`flex flex-1 flex-col items-center justify-center rounded-xl py-1 transition-all duration-200 active:scale-90 ${
+                active ? 'text-blue-600' : 'text-slate-400'
               }`}
             >
-              <div className={`p-1 rounded-lg ${active ? 'bg-blue-50' : ''}`}>
+              <div className={`rounded-lg p-1.5 ${active ? 'bg-blue-50' : 'bg-transparent'}`}>
                 <span
                   className="material-symbols-outlined text-[22px]"
                   style={{
@@ -32,9 +33,10 @@ const BottomNavBar = ({ activePage, setActivePage }) => {
                   {icon}
                 </span>
               </div>
+
               <span
-                className={`text-[9px] font-bold uppercase tracking-wider mt-0.5 ${
-                  active ? 'text-primary' : 'text-slate-400'
+                className={`mt-0.5 text-[9px] font-bold uppercase tracking-wider ${
+                  active ? 'text-blue-600' : 'text-slate-400'
                 }`}
               >
                 {label}
@@ -46,5 +48,3 @@ const BottomNavBar = ({ activePage, setActivePage }) => {
     </nav>
   )
 }
-
-export default BottomNavBar

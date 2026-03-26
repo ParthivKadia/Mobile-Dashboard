@@ -6,12 +6,13 @@ import ProductsPage from './pages/ProductsPage'
 import HomePage from './pages/HomePage'
 import OrdersPage from './pages/OrdersPage'
 import InsightsPage from './pages/InsightsPage'
+import MorePage from './pages/MorePage'
 
 function App() {
   const [activePage, setActivePage] = useState('home')
 
   return (
-    <div className="bg-[#f7f9fb] text-on-surface min-h-screen pb-32">
+    <div className="bg-[#f7f9fb] text-on-surface min-h-screen pb-32 overflow-x-hidden">
       <TopAppBar />
 
       {activePage === 'home' ? (
@@ -22,6 +23,8 @@ function App() {
         <OrdersPage />
       ) : activePage === 'insights' ? (
         <InsightsPage />
+      ) : activePage === 'more' ? (
+        <MorePage />
       ) : (
         <HomePage />
       )}
